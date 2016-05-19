@@ -72,7 +72,7 @@ dng_sdk_files := \
     source/dng_xy_coord.cpp \
     source/dng_xmp.cpp
 
-LOCAL_MODULE := libdng_sdk
+LOCAL_MODULE := libdng
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := $(dng_sdk_files)
 
@@ -86,25 +86,26 @@ LOCAL_CFLAGS += -Wno-ignored-qualifiers
 LOCAL_CLANG := true
 LOCAL_SANITIZE := unsigned-integer-overflow signed-integer-overflow
 
-LOCAL_SHARED_LIBRARIES := libz libjpeg
+LOCAL_SHARED_LIBRARIES := libjpeg
+LOCAL_EXPORT_LDLIBS := -lz
 
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/source
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 
 # dng sdk unittests for target
 # ========================================================
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := dng_validate
-LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := \
-    $(dng_sdk_files) \
-    source/dng_validate.cpp
-
-LOCAL_CFLAGS := -DUNIX_ENV=1 -DqDNGBigEndian=0 -DqDNGThreadSafe=1 -DqDNGUseLibJPEG=1 -DqDNGUseXMP=0 -DqDNGValidate=1 -DqDNGValidateTarget=1 -DqAndroid=1 -fexceptions -Wsign-compare -Wno-reorder -Wframe-larger-than=20000 -frtti
-
-LOCAL_SHARED_LIBRARIES := libz libjpeg
-
-include $(BUILD_EXECUTABLE)
+#
+#include $(CLEAR_VARS)
+#
+#LOCAL_MODULE := dng_validate
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_SRC_FILES := \
+#    $(dng_sdk_files) \
+#    source/dng_validate.cpp
+#
+#LOCAL_CFLAGS := -DUNIX_ENV=1 -DqDNGBigEndian=0 -DqDNGThreadSafe=1 -DqDNGUseLibJPEG=1 -DqDNGUseXMP=0 -DqDNGValidate=1 -DqDNGValidateTarget=1 -DqAndroid=1 -fexceptions -Wsign-compare -Wno-reorder -Wframe-larger-than=20000 -frtti
+#
+#LOCAL_SHARED_LIBRARIES := libz libjpeg
+#
+#include $(BUILD_EXECUTABLE)
