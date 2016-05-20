@@ -87,9 +87,10 @@ LOCAL_CLANG := true
 LOCAL_SANITIZE := unsigned-integer-overflow signed-integer-overflow
 
 LOCAL_SHARED_LIBRARIES := libjpeg
-LOCAL_EXPORT_LDLIBS := -lz
+LOCAL_EXPORT_LDLIBS := -lz	#static
+# LOCAL_LDLIBS    += -lz 	#shared
 
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/source
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/source
 
 include $(BUILD_STATIC_LIBRARY)
 
